@@ -39,7 +39,7 @@ public class ControllerCollider : MonoBehaviour {
             }
         }
 
-        if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+        if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
             Debug.Log("grip");
             GameObject.Find("Sphere").GetComponent<Ball>().resetBall();
@@ -107,14 +107,15 @@ public class ControllerCollider : MonoBehaviour {
             Destroy(fixedJoint);
             // 3
 
-            objectInHand.GetComponent<Ball>().throwBall();
-
             Rigidbody rb = objectInHand.GetComponent<Rigidbody>();
             rb.velocity = Controller.velocity;
             rb.angularVelocity = Controller.angularVelocity;
 
             //buff
             rb.AddForce(rb.velocity.normalized*1000);
+
+            objectInHand.GetComponent<Ball>().throwBall();
+
         }
         // 4
         objectInHand = null;

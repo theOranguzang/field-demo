@@ -9,6 +9,11 @@ public class Ball : MonoBehaviour {
         get; private set;
     }
 
+    public Vector3 releaseVelocity
+    {
+        get; private set;
+    }
+
     private Rigidbody rb;
 
     public void grabBall()
@@ -19,12 +24,15 @@ public class Ball : MonoBehaviour {
     public void throwBall()
     {
         ballHasBeenThrown = true;
+        releaseVelocity = rb.velocity;
     }
 
     public void resetBall()
     {
         ballHasBeenThrown = false;
         rb.isKinematic = true;
+
+        releaseVelocity = Vector3.zero;
 
         transform.position = new Vector3(0, 2.0f, 0);
         ballHasBeenThrown = false;
